@@ -1,12 +1,12 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- All objects in this world that move must implemnt the Movalbe interface.
+ All objects in this world that move must implement the Movalbe interface.
  */
 interface Movable {
   /*
     Return the x location of the Movable
    */
   float getX();
-
+    
   /*
     Return the y location of the Movable
    */
@@ -48,7 +48,7 @@ interface Movable {
   void update(); 
 
   /*
-    Display the isntance
+    Display the instance
    */
   void show();
 
@@ -67,7 +67,7 @@ interface Movable {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  Abstract base class Mover 
  */
-abstract class Mover {// implements Movable {
+abstract class Mover implements Movable{
 
   protected float x, y;
   protected float speed;
@@ -106,6 +106,7 @@ abstract class Mover {// implements Movable {
 
     //todo: You need to decide what to do when X is less than 0 or greater than width
     //todo: You need to decide what to do when Y is less than 0 or greater than height
+    
   }
 
 
@@ -126,4 +127,37 @@ abstract class Mover {// implements Movable {
   }
   
   //TODO: Part I: implement the methods of Moveable interface - delete this comment
+  float getX(){
+    return x;
+  }
+  float getY(){
+    return y;
+  }
+  float getDirection(){
+    return direction;
+  }
+  float getSpeed(){
+    return speed;
+  }
+  float getRadius(){
+    return radius;
+  }
+  
+  
+  void setDirection(float newDirectionInDegrees){
+    direction = newDirectionInDegrees;
+  }
+  
+  void setSpeed(float newSpeed){
+    speed = newSpeed;
+  }
+  
+  void setX(float x_pos){
+    x = x_pos;
+  }
+  
+  void setY(float y_pos){
+    y = y_pos;
+  }
+  
 }
