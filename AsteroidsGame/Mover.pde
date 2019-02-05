@@ -71,25 +71,19 @@ abstract class Mover implements Movable{
 
   protected float x, y;
   protected float speed;
+  protected float size;
   protected float direction;
   protected int myColor;
   protected float radius;  
 
-  /*
-    Default Mover, not actually moving and directionless
-  */
-  Mover(float x, float y) {
-    //The line below shows how we can 
-    //link this constructor to the constructor below through "this"
-    this(x, y, 0, 0);  
-  }
 
   /*
     Mover constructor specifying x, y position along with its speed and
     direction (in degrees)
   */
-  Mover(float x, float y, float speed, float direction) {
+  Mover(float x, float y, float speed, float direction, float size) {
     this.x = x;
+    this.size = size;
     this.y = y;
     this.speed = speed;
     this.direction = direction;
@@ -103,6 +97,7 @@ abstract class Mover implements Movable{
   void update() {
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
+    
 
     //todo: You need to decide what to do when X is less than 0 or greater than width
     //todo: You need to decide what to do when Y is less than 0 or greater than height
@@ -122,8 +117,10 @@ abstract class Mover implements Movable{
   /*
     TODO: Part 4: Implement collision detection
    */
-  boolean collidingWith(Movable object){
-     return false; 
+  boolean collidingWith(Movable m){
+    float distance = dist(x, y, m.getX(), m.getY());
+    boolean touching = distance < (radius + m.getRadius());
+    return touching; 
   }
   
   //TODO: Part I: implement the methods of Moveable interface - delete this comment

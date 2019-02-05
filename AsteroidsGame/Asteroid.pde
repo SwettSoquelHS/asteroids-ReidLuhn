@@ -6,18 +6,18 @@
     but the final program should use "beginShap(), vertex(), and endShape()"
     to render the asteroid.
 */
-class Asteroid extends Mover {   
+class Asteroid extends Mover{   
   //your code here
-  float rotation;
-  float[] xCoords = new float[10];
-  float[] yCoords = new float[10];
+  float rotation, size;
+  boolean hit;
+  int wait;
   
-  Asteroid(float x, float y){
-    super(x, y);
-  }
-  
-  public Asteroid(float x, float y, float speed, float direction){
-    super(x, y, speed, direction);
+  public Asteroid(float x, float y, float speed, float direction, float rotation, float size){
+    super(x, y, speed, direction, size);
+    radius = 20.0;
+    this.size = size;
+    rotation = 0;
+    wait = 0;
   }
   
   
@@ -26,19 +26,26 @@ class Asteroid extends Mover {
     pushMatrix();
     translate(x, y);
     rotate(radians(rotation));
-    fill(200);
-    scale(2.0);
+    fill(90);
     beginShape();
-    vertex(5.0, 0.0);
-    vertex(0.0, 8.0);
-    vertex(-5.0, 0.0);
-    vertex(-5.0, 5.0);
+    vertex(-5.0, 20.0 );
+    vertex(5.0, 15.0 );
+    vertex(25.0, 15.0 );
+    vertex(20.0, 5.0 );
+    vertex(15.0 , -10.0 );
+    vertex(5.0 , -15.0 );
+    vertex(5.0 , -25.0 );
+    vertex(-15.0 , -20.0 );
+    vertex(-15.0 , 0.0 );
+    vertex(-5.0 , 20.0 );
     endShape();
-    popMatrix();    
+    popMatrix();
   }
   
   void update(){
     x = x + speed*(float)Math.cos(radians(direction));
     y = y + speed*(float)Math.sin(radians(direction));
     rotation += 2;
+    wait--;
+  } 
 }

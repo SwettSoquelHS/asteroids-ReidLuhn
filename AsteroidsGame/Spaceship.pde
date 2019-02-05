@@ -5,13 +5,13 @@
     might be useful.
 */
 class Spaceship extends Mover{  
-    
-  Spaceship(float x, float y){
-    super(x, y);
-  }
+  ArrayList clip = new ArrayList();
+  int wait;
   
-  public Spaceship(float x, float y, float speed, float direction){
-    super(x, y, speed, direction);
+  public Spaceship(float x, float y, float speed, float direction, float size){
+    super(x, y, speed, direction, size);
+    radius = 27.0;
+    wait = 0;
   }
   
   void show(){
@@ -61,4 +61,33 @@ class Spaceship extends Mover{
     endShape();
     popMatrix();
   }
+  
+  void Hyperspace(){
+    x = (float)Math.random() * 640;
+    y = (float)Math.random() * 400;
+  }
+  
+   void update() {
+    x = x + speed*(float)Math.cos(radians(direction));
+    y = y + speed*(float)Math.sin(radians(direction));
+    wait--;
+  }
+  
+  void fire(){
+    if (wait < 0){
+      Bullet b = new Bullet(player1.getX(), player1.getY(), 5.0, player1.getDirection(), 0);
+      clip.add(b);
+      wait = 14;
+    }
+  }
+  
+  public boolean hasHitTarget(Asteroid a, Bullet bullet){
+    Bullet b = (Bullet)bullet;
+    Asteroid rock = (Asteroid)a;
+    if(rock.collidingWith(b)){
+       return true;
+     }
+     return false;
+  }
+  
 }
