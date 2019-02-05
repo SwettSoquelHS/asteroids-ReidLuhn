@@ -13,11 +13,12 @@ Star[] starField = new Star[100];
 /*
   Track User keyboard input
  */
-boolean ROTATE_LEFT;  //User is pressing <-
-boolean ROTATE_RIGHT; //User is pressing ->
-boolean MOVE_FORWARD; //User is pressing ^ arrow
-boolean SPACE_BAR;    //User is pressing space bar
+boolean ROTATE_LEFT;   //User is pressing <-
+boolean ROTATE_RIGHT;  //User is pressing ->
+boolean MOVE_FORWARD;  //User is pressing ^ arrow
+boolean SPACE_BAR;     //User is pressing space bar
 boolean MOVE_BACKWARD; //User is pressing down arrow
+boolean HYPERSPACE;    //User is pressing 'h' key
 int score = 0;
 int lives = 5;
 int wait;
@@ -178,6 +179,10 @@ public void draw() {
     if (SPACE_BAR) {
       player1.fire();
     }
+    
+    if (HYPERSPACE) {
+      player1.hyperSpace();
+    }
     //Update score
     //TODO: Keep track of a score and output the score at the top right
 }
@@ -204,6 +209,10 @@ public void draw() {
     if (keyCode == 32) {  
       SPACE_BAR = true;
     }
+    
+    if (keyCode == 72) {
+      HYPERSPACE = true;
+    }
   }
 
 
@@ -225,6 +234,10 @@ public void draw() {
     }
     if (keyCode == 32) {
       SPACE_BAR = false;
+    }
+    
+    if (keyCode == 72) {
+      HYPERSPACE = false;
     }
   }
 
