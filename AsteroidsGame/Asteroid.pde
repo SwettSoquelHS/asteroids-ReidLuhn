@@ -27,6 +27,7 @@ class Asteroid extends Mover{
     translate(x, y);
     rotate(radians(rotation));
     fill(90);
+    scale(size);
     beginShape();
     vertex(-5.0, 20.0 );
     vertex(5.0, 15.0 );

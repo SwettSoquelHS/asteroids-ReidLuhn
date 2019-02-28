@@ -34,7 +34,7 @@ public void setup() {
   //initialize your asteroid array and fill it
 
   for (int i = 0; i < 20; i++) {
-    asteroids.add(new Asteroid((float)Math.random() * 1280, (float)Math.random() * 800, (float)((Math.random() * 2.0) + 2), (float)Math.random() * 360.0, 0, random(.8, 1.3)));
+    asteroids.add(new Asteroid((float)Math.random() * 1280, (float)Math.random() * 800, (float)((Math.random() * 2.0) + 2), (float)Math.random() * 360.0, 0, 1.0));
     //x, y,
   }
   player1 = new Spaceship((float)width / 2, (float)height / 2, 1.0, 0.0, 0); //x, y, speed, 
@@ -249,8 +249,11 @@ public void draw() {
         Bullet b = (Bullet)player1.clip.get(j);
         if (player1.hasHitTarget(a, b)) {
           player1.clip.remove(j);
-          println(j);
-          println(player1.clip.size());
+          if(a.size == 1){
+            asteroids.remove(i);
+            asteroids.add(new Asteroid(a.getX(), a.getY(), a.getSpeed() / 2, (float)Math.random() * 360.0, 0, 0.5));
+            asteroids.add(new Asteroid(a.getX(), a.getY(), a.getSpeed() / 2, (float)Math.random() * 360.0, 0, 0.5));
+          }
           asteroids.remove(i);
           score += 10;
         }
